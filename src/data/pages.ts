@@ -267,7 +267,37 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 8 }, (_, index) => emptyPage(index + 9)),
+  {
+    id: 9,
+    title: 'Kalau Kamu Mau Bahagia',
+    emoji: '🤍',
+    accent: '#ffd9e3',
+    doodles: ['heart', 'cloud', 'squiggle'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Wid, kalau kamu mau mulai hubungan baru sama orang lain, silakan.',
+      },
+      {
+        type: 'curhat',
+        text: 'Sekarang udah banyak pria yang deket sama kamu. Tinggal kamu buka hati. Nggak semua cowok brengsek kayak aku.',
+      },
+      {
+        type: 'curhat',
+        text: 'Kali aja setelah sama aku, kamu bisa bahagia terus sama cowok barumu. Udah banyak yang kita pelajarin selama dua tahun ini.',
+      },
+      {
+        type: 'curhat',
+        text: 'Aku juga lagi belajar ikhlas buat lihat kamu nanti post sama cowok baru. Kemarin kamu ganti PP, terus post foto terus. Aku tahu kamu lagi deket sama cowok — atau mungkin baru save nomor cowok, Wid.',
+      },
+      {
+        type: 'quote',
+        text: 'Jujur, aku ikhlas banget kok. Beneran.',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 9 }, (_, index) => emptyPage(index + 10)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {

@@ -92,8 +92,18 @@ describe('buku catatan 30 halaman', () => {
     expect(texts).toContain('nggak pernah putus')
   })
 
-  it('halaman 9 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(8)) {
+  it('halaman 9 berisi catatan tentang belajar ikhlas', () => {
+    const ninth = getPage(9)
+    expect(ninth?.status).toBe('ready')
+    const texts = ninth?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
+    expect(texts).toContain('hubungan baru')
+    expect(texts).toContain('dua tahun')
+    expect(texts).toContain('ikhlas')
+    expect(texts).toContain('save nomor cowok')
+  })
+
+  it('halaman 10 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(9)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }
