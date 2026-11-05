@@ -116,7 +116,35 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 3 }, (_, index) => emptyPage(index + 4)),
+  {
+    id: 4,
+    title: 'Foto Kedua Kita',
+    emoji: '📸',
+    accent: '#ffd9e3',
+    doodles: ['heart', 'star', 'smiley'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Aku masih inget hari itu. Ini foto kedua kalinya kita ketemu.',
+      },
+      {
+        type: 'photo',
+        src: '/photos/foto-kedua-kali.jpg',
+        caption: 'kedua kalinya kita meet 🤍',
+        alt: 'Foto kenangan pertemuan kedua',
+      },
+      {
+        type: 'curhat',
+        text: 'Rasanya seneng banget, jujur. Aku ngerasa dihargain pas pertama kali ketemu kamu — dan yang kedua kalinya juga.',
+      },
+      {
+        type: 'curhat',
+        text: 'Terus aku seneng banget pas tau kalau aku cowok pertama yang kamu bawa ke rumah. Itu rasanya istimewa banget.',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 4 }, (_, index) => emptyPage(index + 5)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {

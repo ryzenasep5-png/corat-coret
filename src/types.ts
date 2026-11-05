@@ -1,4 +1,4 @@
-export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist' | 'curhat'
+export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist' | 'curhat' | 'photo'
 
 export interface NoteBlock {
   type: 'note'
@@ -51,6 +51,13 @@ export interface CurhatBlock {
   text: string
 }
 
+export interface PhotoBlock {
+  type: 'photo'
+  src: string
+  caption?: string
+  alt?: string
+}
+
 export type PageBlock =
   | NoteBlock
   | JokeBlock
@@ -61,6 +68,7 @@ export type PageBlock =
   | StampBlock
   | PlaylistBlock
   | CurhatBlock
+  | PhotoBlock
 
 export type DoodleKey = 'heart' | 'star' | 'moon' | 'smiley' | 'squiggle' | 'arrow' | 'flower' | 'cloud' | 'couple'
 

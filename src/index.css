@@ -207,6 +207,51 @@ body {
   animation: eq-bounce 0.8s ease-in-out infinite;
 }
 
+/* ---------- photo polaroid ---------- */
+.block-photo {
+  position: relative;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.9rem 0.9rem 0.7rem;
+  background: #fffdf6;
+  border: 1px solid rgba(120, 105, 80, 0.18);
+  border-radius: 6px;
+  box-shadow: 0 14px 30px -12px rgba(86, 68, 48, 0.45);
+  transform: rotate(-2deg);
+  transition: transform 0.25s ease;
+}
+
+.block-photo:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.block-photo::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 92px;
+  height: 26px;
+  transform: translateX(-50%) rotate(2deg);
+  background: rgba(205, 233, 255, 0.75);
+  border: 1px solid rgba(123, 167, 204, 0.3);
+  box-shadow: 0 2px 4px rgba(90, 70, 40, 0.12);
+  z-index: 1;
+}
+
+.block-photo img {
+  width: 100%;
+  border-radius: 3px;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}
+
+.block-photo figcaption {
+  margin-top: 0.55rem;
+  text-align: center;
+}
+
 /* ---------- nav buttons ---------- */
 .nav-arrow {
   display: inline-flex;

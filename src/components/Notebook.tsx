@@ -19,6 +19,7 @@ const BLOCK_META: Record<PageBlock['type'], { icon: string; label: string }> = {
   stamp: { icon: '', label: '' },
   playlist: { icon: '🎧', label: '' },
   curhat: { icon: '🌧️', label: '' },
+  photo: { icon: '', label: '' },
 }
 
 function Tape({ color, side }: { color: string; side: 'left' | 'right' }) {
@@ -43,6 +44,15 @@ function Block({ block }: { block: PageBlock }) {
       <div className="block-curhat my-4 px-4 py-3">
         <p className="font-hand text-[1.2rem] leading-relaxed text-ink">{block.text}</p>
       </div>
+    )
+  }
+
+  if (block.type === 'photo') {
+    return (
+      <figure className="block-photo my-6">
+        <img src={block.src} alt={block.alt ?? block.caption ?? 'Foto kenangan'} loading="lazy" />
+        {block.caption ? <figcaption className="font-hand text-lg text-inksoft">{block.caption}</figcaption> : null}
+      </figure>
     )
   }
 

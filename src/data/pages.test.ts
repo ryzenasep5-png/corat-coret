@@ -39,8 +39,20 @@ describe('buku catatan 30 halaman', () => {
     expect(texts).toContain('nyesel')
   })
 
-  it('halaman 4 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(3)) {
+  it('halaman 4 berisi foto kenangan pertemuan kedua', () => {
+    const fourth = getPage(4)
+    expect(fourth?.status).toBe('ready')
+    const photo = fourth?.blocks.find((block) => block.type === 'photo')
+    if (photo?.type === 'photo') {
+      expect(photo.src).toBe('/photos/foto-kedua-kali.jpg')
+    }
+    const texts = fourth?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
+    expect(texts).toContain('cowok pertama')
+    expect(texts).toContain('ke rumah')
+  })
+
+  it('halaman 5 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(4)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }
