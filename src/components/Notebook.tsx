@@ -5,6 +5,7 @@ import { getPage, pages, TOTAL_PAGES } from '../data/pages'
 import type { PageBlock } from '../types'
 import { readJSON, writeJSON } from '../lib/storage'
 import Doodles from './Doodles'
+import PlaylistBlock from './PlaylistBlock'
 
 const LAST_PAGE_KEY = 'lastPage'
 
@@ -15,6 +16,8 @@ const BLOCK_META: Record<PageBlock['type'], { icon: string; label: string }> = {
   list: { icon: '⭐', label: '' },
   fact: { icon: '📅', label: '' },
   couple: { icon: '💞', label: '' },
+  stamp: { icon: '', label: '' },
+  playlist: { icon: '🎧', label: '' },
 }
 
 function Tape({ color, side }: { color: string; side: 'left' | 'right' }) {
@@ -29,6 +32,21 @@ function Tape({ color, side }: { color: string; side: 'left' | 'right' }) {
 
 function Block({ block }: { block: PageBlock }) {
   const meta = BLOCK_META[block.type]
+
+  if (block.type === 'playlist') {
+    return <PlaylistBlock title={block.title} subtitle={block.subtitle} />
+  }
+
+  if (block.type === 'stamp') {
+    return (
+      <div className="my-5 flex justify-center">
+        <div className="block-stamp -rotate-6 px-6 py-2 text-center">
+          <p className="font-hand text-xl leading-none text-rose">{block.text}</p>
+          {block.sub ? <p className="mt-1 font-hand text-sm text-rose/80">{block.sub}</p> : null}
+        </div>
+      </div>
+    )
+  }
 
   if (block.type === 'couple') {
     return (

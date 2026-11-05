@@ -1,4 +1,4 @@
-export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple'
+export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist'
 
 export interface NoteBlock {
   type: 'note'
@@ -34,9 +34,21 @@ export interface CoupleBlock {
   right: string
 }
 
-export type PageBlock = NoteBlock | JokeBlock | QuoteBlock | ListBlock | FactBlock | CoupleBlock
+export interface StampBlock {
+  type: 'stamp'
+  text: string
+  sub?: string
+}
 
-export type DoodleKey = 'heart' | 'star' | 'moon' | 'smiley' | 'squiggle' | 'arrow' | 'flower' | 'cloud'
+export interface PlaylistBlock {
+  type: 'playlist'
+  title: string
+  subtitle?: string
+}
+
+export type PageBlock = NoteBlock | JokeBlock | QuoteBlock | ListBlock | FactBlock | CoupleBlock | StampBlock | PlaylistBlock
+
+export type DoodleKey = 'heart' | 'star' | 'moon' | 'smiley' | 'squiggle' | 'arrow' | 'flower' | 'cloud' | 'couple'
 
 export interface NotebookPage {
   id: number

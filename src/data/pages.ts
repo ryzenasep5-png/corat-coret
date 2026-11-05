@@ -18,12 +18,12 @@ export const pages: NotebookPage[] = [
     title: 'Our Little Story',
     emoji: '❣️',
     accent: '#ffd9e3',
-    doodles: ['heart', 'star', 'moon', 'squiggle'],
+    doodles: ['heart', 'star', 'moon', 'couple'],
     status: 'ready',
     blocks: [
       {
         type: 'note',
-        text: 'Cerita ini dimulai pukul 01:42 malam — saat dunia sudah tidur, tapi dua orang ini belum. (Dasar, jam segitu malah jadian.)',
+        text: 'Jam 01:42 malam, dunia udah pada tidur… eh, dua orang ini malah resmi jadian. 🤭',
       },
       {
         type: 'couple',
@@ -32,12 +32,17 @@ export const pages: NotebookPage[] = [
       },
       {
         type: 'fact',
-        label: 'Jadian',
+        label: 'Hari jadi "kita"',
         value: '22 Desember 2024 · pukul 01:42',
       },
       {
+        type: 'stamp',
+        text: '22 · 12 · 2024',
+        sub: '01:42 malam',
+      },
+      {
         type: 'joke',
-        text: 'Katanya orang jadian tengah malam biar bintang-bintang ikut jadi saksi. Masalahnya jam 01:42 bintangnya juga udah ngantuk. Tapi katanya mereka tetap melirik.',
+        text: 'Katanya jadian tengah malam biar bintang-bintang ikut jadi saksi. Masalahnya jam 01:42 bintangnya udah ngantuk juga. Tapi kabarnya mereka tetap melirik sebentar.',
       },
       {
         type: 'quote',
@@ -45,7 +50,7 @@ export const pages: NotebookPage[] = [
       },
       {
         type: 'list',
-        title: 'Fakta kecil dari halaman ini',
+        title: 'Fakta-fakta receh',
         items: [
           'Desember itu musim hujan — jadi sejak hari pertama mereka memang siap basah-basahan.',
           '01:42 resmi masuk daftar jam paling disayang.',
@@ -54,7 +59,26 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 1 }, (_, index) => emptyPage(index + 2)),
+  {
+    id: 2,
+    title: 'Lagu-Lagu Kita',
+    emoji: '🎶',
+    accent: '#cde9ff',
+    doodles: ['star', 'squiggle', 'heart'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: '18 lagu yang bisa diputar langsung di halaman ini. Nggak perlu buka YouTube — tinggal pencet. (Kecuali internetnya lagi ngambek.)',
+      },
+      {
+        type: 'playlist',
+        title: 'Putar di sini 🎵',
+        subtitle: 'Semua lagu resmi, diputar lewat YouTube di dalam halaman.',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 2 }, (_, index) => emptyPage(index + 3)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {

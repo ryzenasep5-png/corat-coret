@@ -93,6 +93,23 @@ function CloudDoodle({ className = '' }: DoodleProps) {
   )
 }
 
+function CoupleDoodle({ className = '' }: DoodleProps) {
+  return (
+    <svg width="74" height="56" viewBox="0 0 74 56" className={className}>
+      <path d="M30 8c-2.5-3.4-7-3.4-9.5 0-1 1.4-1.3 3.2-.8 4.8M30 8c2.5-3.4 7-3.4 9.5 0 1 1.4 1.3 3.2.8 4.8" fill="none" stroke="#6d6584" strokeWidth="2.2" strokeLinecap="round" />
+      <circle cx="20.5" cy="19" r="5" fill="#ffd9e3" stroke="#6d6584" strokeWidth="2.2" />
+      <circle cx="39.5" cy="19" r="5" fill="#cde9ff" stroke="#6d6584" strokeWidth="2.2" />
+      <path d="M17.5 16.8c0.8 0.8 1.9 1.2 3 1.2M36.5 16.8c0.8 0.8 1.9 1.2 3 1.2" fill="none" stroke="#6d6584" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M18.5 25.5c1 1.4 2.5 2.3 4.2 2.3 1.9 0 3.6-1.1 4.4-2.7" fill="none" stroke="#3b3550" strokeWidth="2.4" strokeLinecap="round" />
+      <path d="M37.5 25.5c1 1.4 2.5 2.3 4.2 2.3 1.9 0 3.6-1.1 4.4-2.7" fill="none" stroke="#3b3550" strokeWidth="2.4" strokeLinecap="round" />
+      <path d="M20 27c4 7 6 11 6 14M40 27c-4 7-6 11-6 14" fill="none" stroke="#6d6584" strokeWidth="2.2" strokeLinecap="round" />
+      <path d="M20 39c5 0 6-7 11-7" fill="none" stroke="#e27396" strokeWidth="2.2" strokeLinecap="round" />
+      <circle cx="28" cy="14" r="2.8" fill="#ff9db4" />
+      <path d="M31 8.6c0.7-0.6 1.7-0.8 2.5-0.5" fill="none" stroke="#e27396" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 const DOODLE_MAP: Record<DoodleKey, (props: DoodleProps) => React.JSX.Element> = {
   heart: HeartDoodle,
   star: StarDoodle,
@@ -102,6 +119,7 @@ const DOODLE_MAP: Record<DoodleKey, (props: DoodleProps) => React.JSX.Element> =
   arrow: ArrowDoodle,
   flower: FlowerDoodle,
   cloud: CloudDoodle,
+  couple: CoupleDoodle,
 }
 
 const SPOTS: Record<DoodleKey, { left: string; top: string; rotate: number; anim: 'doodle-wiggle' | 'doodle-float' }> = {
@@ -113,6 +131,7 @@ const SPOTS: Record<DoodleKey, { left: string; top: string; rotate: number; anim
   arrow: { left: '60%', top: '-3%', rotate: 16, anim: 'doodle-float' },
   flower: { left: '-3%', top: '12%', rotate: -12, anim: 'doodle-wiggle' },
   cloud: { left: '70%', top: '4%', rotate: -6, anim: 'doodle-float' },
+  couple: { left: '76%', top: '16%', rotate: 4, anim: 'doodle-wiggle' },
 }
 
 export default function Doodles({ keys }: { keys: DoodleKey[] }) {

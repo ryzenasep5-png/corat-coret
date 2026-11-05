@@ -24,8 +24,14 @@ describe('buku catatan 30 halaman', () => {
     }
   })
 
-  it('halaman 2 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(1)) {
+  it('halaman 2 berisi playlist lagu', () => {
+    const second = getPage(2)
+    expect(second?.status).toBe('ready')
+    expect(second?.blocks.some((block) => block.type === 'playlist')).toBe(true)
+  })
+
+  it('halaman 3 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(2)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }
