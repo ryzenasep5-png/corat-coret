@@ -18,6 +18,7 @@ const BLOCK_META: Record<PageBlock['type'], { icon: string; label: string }> = {
   couple: { icon: '💞', label: '' },
   stamp: { icon: '', label: '' },
   playlist: { icon: '🎧', label: '' },
+  curhat: { icon: '🌧️', label: '' },
 }
 
 function Tape({ color, side }: { color: string; side: 'left' | 'right' }) {
@@ -35,6 +36,14 @@ function Block({ block }: { block: PageBlock }) {
 
   if (block.type === 'playlist') {
     return <PlaylistBlock title={block.title} subtitle={block.subtitle} />
+  }
+
+  if (block.type === 'curhat') {
+    return (
+      <div className="block-curhat my-4 px-4 py-3">
+        <p className="font-hand text-[1.2rem] leading-relaxed text-ink">{block.text}</p>
+      </div>
+    )
   }
 
   if (block.type === 'stamp') {

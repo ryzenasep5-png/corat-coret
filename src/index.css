@@ -149,11 +149,21 @@ body {
 }
 
 /* ---------- blocks ---------- */
-.block-note,
-.block-curhat {
+.block-note {
   background: rgba(255, 241, 201, 0.55);
   border: 1.5px dashed rgba(214, 178, 94, 0.55);
   border-radius: 0.9rem;
+}
+
+.block-curhat {
+  background: rgba(205, 233, 255, 0.32);
+  border-left: 3px solid rgba(123, 167, 204, 0.5);
+  border-radius: 0.6rem;
+  transform: rotate(-0.35deg);
+}
+
+.block-curhat:nth-child(even) {
+  transform: rotate(0.35deg);
 }
 
 .block-joke {

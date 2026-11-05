@@ -78,7 +78,45 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 2 }, (_, index) => emptyPage(index + 3)),
+  {
+    id: 3,
+    title: 'Catatan Malam Ini',
+    emoji: '🌧️',
+    accent: '#cde9ff',
+    doodles: ['cloud', 'moon', 'squiggle'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'curhat',
+        text: 'Beberapa hari ini hatiku hancur banget. Mungkin apa yang aku rasain, kamu juga ngerasain. Atau mungkin nggak. Aku nggak pernah tahu.',
+      },
+      {
+        type: 'curhat',
+        text: 'Jujur, sakitnya kerasa banget. Aku sampai mau nyerah beberapa kali.',
+      },
+      {
+        type: 'curhat',
+        text: 'Kamarku jadi sepi. Cuma ada lantunan lagu dari Spotify yang kupasang, biar kesepian itu nggak terlalu nyaring bunyinya.',
+      },
+      {
+        type: 'curhat',
+        text: 'Dulu selalu ada suara kamu yang ngisi kekosongan kamarku. Sekarang udah nggak ada.',
+      },
+      {
+        type: 'curhat',
+        text: 'Mungkin sekarang kamu ngisi kekosongan kamar cowok lain. Aku nggak bisa bohong — itu terus kepikiran.',
+      },
+      {
+        type: 'curhat',
+        text: 'Jujur makasih banget. Kamu udah bikin aku nyesel banget atas apa yang dulu aku lakuin.',
+      },
+      {
+        type: 'note',
+        text: 'ditulis malam ini, pelan-pelan. ✍️',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 3 }, (_, index) => emptyPage(index + 4)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {

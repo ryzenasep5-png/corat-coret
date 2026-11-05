@@ -1,4 +1,4 @@
-export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist'
+export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist' | 'curhat'
 
 export interface NoteBlock {
   type: 'note'
@@ -46,7 +46,21 @@ export interface PlaylistBlock {
   subtitle?: string
 }
 
-export type PageBlock = NoteBlock | JokeBlock | QuoteBlock | ListBlock | FactBlock | CoupleBlock | StampBlock | PlaylistBlock
+export interface CurhatBlock {
+  type: 'curhat'
+  text: string
+}
+
+export type PageBlock =
+  | NoteBlock
+  | JokeBlock
+  | QuoteBlock
+  | ListBlock
+  | FactBlock
+  | CoupleBlock
+  | StampBlock
+  | PlaylistBlock
+  | CurhatBlock
 
 export type DoodleKey = 'heart' | 'star' | 'moon' | 'smiley' | 'squiggle' | 'arrow' | 'flower' | 'cloud' | 'couple'
 

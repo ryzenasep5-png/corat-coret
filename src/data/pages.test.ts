@@ -30,8 +30,17 @@ describe('buku catatan 30 halaman', () => {
     expect(second?.blocks.some((block) => block.type === 'playlist')).toBe(true)
   })
 
-  it('halaman 3 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(2)) {
+  it('halaman 3 berisi curhat malam', () => {
+    const third = getPage(3)
+    expect(third?.status).toBe('ready')
+    const texts = third?.blocks.filter((block) => block.type === 'curhat').map((block) => (block as { text: string }).text).join(' ') ?? ''
+    expect(texts).toContain('Spotify')
+    expect(texts).toContain('kamar cowok lain')
+    expect(texts).toContain('nyesel')
+  })
+
+  it('halaman 4 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(3)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }
