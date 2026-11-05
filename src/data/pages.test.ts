@@ -51,8 +51,18 @@ describe('buku catatan 30 halaman', () => {
     expect(texts).toContain('ke rumah')
   })
 
-  it('halaman 5 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(4)) {
+  it('halaman 5 berisi kalender dengan tanda 1 Februari', () => {
+    const fifth = getPage(5)
+    expect(fifth?.status).toBe('ready')
+    const calendar = fifth?.blocks.find((block) => block.type === 'calendar')
+    if (calendar?.type === 'calendar') {
+      expect(calendar.days).toBe(28)
+      expect(calendar.marked.some((mark) => mark.day === 1 && mark.style === 'ring')).toBe(true)
+    }
+  })
+
+  it('halaman 6 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(5)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }

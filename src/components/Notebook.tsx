@@ -6,6 +6,7 @@ import type { PageBlock } from '../types'
 import { readJSON, writeJSON } from '../lib/storage'
 import Doodles from './Doodles'
 import PlaylistBlock from './PlaylistBlock'
+import CalendarBlock from './CalendarBlock'
 
 const LAST_PAGE_KEY = 'lastPage'
 
@@ -20,6 +21,7 @@ const BLOCK_META: Record<PageBlock['type'], { icon: string; label: string }> = {
   playlist: { icon: '🎧', label: '' },
   curhat: { icon: '🌧️', label: '' },
   photo: { icon: '', label: '' },
+  calendar: { icon: '', label: '' },
 }
 
 function Tape({ color, side }: { color: string; side: 'left' | 'right' }) {
@@ -45,6 +47,10 @@ function Block({ block }: { block: PageBlock }) {
         <p className="font-hand text-[1.2rem] leading-relaxed text-ink">{block.text}</p>
       </div>
     )
+  }
+
+  if (block.type === 'calendar') {
+    return <CalendarBlock monthLabel={block.monthLabel} days={block.days} marked={block.marked} />
   }
 
   if (block.type === 'photo') {

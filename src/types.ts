@@ -1,4 +1,4 @@
-export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist' | 'curhat' | 'photo'
+export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist' | 'curhat' | 'photo' | 'calendar'
 
 export interface NoteBlock {
   type: 'note'
@@ -58,6 +58,19 @@ export interface PhotoBlock {
   alt?: string
 }
 
+export interface CalendarMark {
+  day: number
+  label: string
+  style: 'ring' | 'heart'
+}
+
+export interface CalendarBlock {
+  type: 'calendar'
+  monthLabel: string
+  days: number
+  marked: CalendarMark[]
+}
+
 export type PageBlock =
   | NoteBlock
   | JokeBlock
@@ -69,6 +82,7 @@ export type PageBlock =
   | PlaylistBlock
   | CurhatBlock
   | PhotoBlock
+  | CalendarBlock
 
 export type DoodleKey = 'heart' | 'star' | 'moon' | 'smiley' | 'squiggle' | 'arrow' | 'flower' | 'cloud' | 'couple'
 

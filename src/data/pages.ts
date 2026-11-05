@@ -144,7 +144,34 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 4 }, (_, index) => emptyPage(index + 5)),
+  {
+    id: 5,
+    title: 'Kalender Dia',
+    emoji: '🎂',
+    accent: '#fff1c9',
+    doodles: ['heart', 'star', 'smiley'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Ada satu tanggal yang nggak pernah kukelewat nulis: 01 Februari.',
+      },
+      {
+        type: 'calendar',
+        monthLabel: 'Februari',
+        days: 28,
+        marked: [
+          { day: 1, label: 'ulang tahun dia 🎂', style: 'ring' },
+          { day: 14, label: 'valentine 💘', style: 'heart' },
+        ],
+      },
+      {
+        type: 'quote',
+        text: 'Ada tanggal yang nggak perlu diingatkan. Dia cukup ditandain lingkaran di kalender — biar semua orang tahu hari itu spesial.',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 5 }, (_, index) => emptyPage(index + 6)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {
