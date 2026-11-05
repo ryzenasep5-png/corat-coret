@@ -5,7 +5,7 @@ import { getPage, pages, TOTAL_PAGES } from '../data/pages'
 import type { PageBlock } from '../types'
 import { readJSON, writeJSON } from '../lib/storage'
 import Doodles from './Doodles'
-import PlaylistBlock from './PlaylistBlock'
+import PlaylistBlock, { PersistentMusicPlayer } from './PlaylistBlock'
 import CalendarBlock from './CalendarBlock'
 
 const LAST_PAGE_KEY = 'lastPage'
@@ -240,6 +240,8 @@ export default function Notebook() {
           <ArrowRight size={19} />
         </button>
       </div>
+
+      <PersistentMusicPlayer />
 
       <div className="flip-viewport">
         <AnimatePresence mode="popLayout" initial={false}>

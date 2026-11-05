@@ -84,11 +84,67 @@ function YouTubePlayer({ track, autoplay, onError }: { track: Track; autoplay: b
   )
 }
 
+export function PersistentMusicPlayer() {
+  const player = usePlayer()
+  const [frameErrorFor, setFrameErrorFor] = useState<string | null>(null)
+  const frameError = frameErrorFor === player.current?.id
+
+  if (!player.current) return null
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="persistent-player w-full max-w-2xl"
+    >
+      <div className="flex items-center justify-between gap-2 font-hand text-sm text-inksoft">
+        <span className="min-w-0 truncate">
+          <span className="text-ink">{player.current.title}</span> · {player.current.artist}
+        </span>
+        <span className="shrink-0 text-rose">tetap nyala 🎵</span>
+      </div>
+      {!frameError ? (
+        <YouTubePlayer
+          track={player.current}
+          autoplay={player.playing}
+          onError={() => setFrameErrorFor(player.current?.id ?? null)}
+        />
+      ) : null}
+      <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+        <button
+          type="button"
+          className="inline-flex items-center gap-1 rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink transition hover:border-rose/40 hover:text-rose"
+          onClick={player.previous}
+        >
+          <SkipBack size={14} /> Sebelumnya
+        </button>
+        <button
+          type="button"
+          className="inline-flex items-center gap-1 rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink transition hover:border-rose/40 hover:text-rose"
+          onClick={player.next}
+        >
+          Berikutnya <SkipForward size={14} />
+        </button>
+        <button
+          type="button"
+          className="inline-flex items-center gap-1 rounded-full border border-rose/40 bg-white/70 px-3 py-1 font-hand text-sm text-rose transition hover:bg-blush/50"
+          onClick={() => player.openOnYouTube(player.current!)}
+        >
+          <ExternalLink size={13} /> Buka YouTube
+        </button>
+      </div>
+      {frameError ? (
+        <p className="mt-2 text-center font-hand text-sm text-rose">Player-nya nggak mau muncul di sini — tombol YouTube tetap bisa dipakai.</p>
+      ) : (
+        <p className="mt-2 text-center font-hand text-xs text-inksoft/80">Player ini tetap ada saat pindah halaman.</p>
+      )}
+    </motion.div>
+  )
+}
+
 export default function PlaylistBlock({ title, subtitle }: { title: string; subtitle?: string }) {
   const player = usePlayer()
   const [collapsed, setCollapsed] = useState(false)
-  const [frameErrorFor, setFrameErrorFor] = useState<string | null>(null)
-  const frameError = frameErrorFor === player.current?.id
 
   return (
     <div className="my-5">
@@ -97,56 +153,14 @@ export default function PlaylistBlock({ title, subtitle }: { title: string; subt
         {subtitle ? <p className="mt-1 font-hand text-base text-inksoft">{subtitle}</p> : null}
       </div>
 
-      <div className="mt-4 rounded-2xl border-2 border-dashed border-ink/20 bg-butter/55 px-3 py-3 sm:px-4">
+      <div className="mt-4 rounded-2xl border-2 border-dashed border-ink/20 bg-butter/55 px-4 py-5 text-center">
         {player.current ? (
-          <>
-            <div className="flex items-center justify-between gap-2 font-hand text-sm text-inksoft">
-              <span className="min-w-0 truncate">
-                <span className="text-ink">{player.current.title}</span> · {player.current.artist}
-              </span>
-              <span className="shrink-0 text-rose">YouTube</span>
-            </div>
-            {!frameError ? (
-              <YouTubePlayer
-                track={player.current}
-                autoplay={player.playing}
-                onError={() => setFrameErrorFor(player.current?.id ?? null)}
-              />
-            ) : null}
-            <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-              <button
-                type="button"
-                className="inline-flex items-center gap-1 rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink transition hover:border-rose/40 hover:text-rose"
-                onClick={player.previous}
-              >
-                <SkipBack size={14} /> Sebelumnya
-              </button>
-              <button
-                type="button"
-                className="inline-flex items-center gap-1 rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink transition hover:border-rose/40 hover:text-rose"
-                onClick={player.next}
-              >
-                Berikutnya <SkipForward size={14} />
-              </button>
-              <button
-                type="button"
-                className="inline-flex items-center gap-1 rounded-full border border-rose/40 bg-white/70 px-3 py-1 font-hand text-sm text-rose transition hover:bg-blush/50"
-                onClick={() => player.openOnYouTube(player.current!)}
-              >
-                <ExternalLink size={13} /> Buka YouTube
-              </button>
-            </div>
-            {frameError ? (
-              <p className="mt-2 text-center font-hand text-sm text-rose">Player-nya nggak mau muncul di sini — tombol YouTube di atas tetap bisa dipakai.</p>
-            ) : (
-              <p className="mt-2 text-center font-hand text-xs text-inksoft/80">Kalau belum otomatis bunyi, pencet ▶ di dalam player-nya ya 🎵</p>
-            )}
-          </>
+          <p className="font-hand text-base text-inksoft">Lagu sedang diputar di player atas — pindah halaman juga tetap lanjut 🤍</p>
         ) : (
-          <div className="rounded-xl border border-ink/10 bg-white/50 px-4 py-8 text-center">
+          <>
             <p className="font-hand text-lg text-ink">Pilih salah satu lagu di bawah 🎵</p>
-            <p className="mt-1 font-hand text-sm text-inksoft">Player YouTube-nya akan muncul di sini.</p>
-          </div>
+            <p className="mt-1 font-hand text-sm text-inksoft">Player YouTube-nya akan muncul di atas dan tetap nyala saat kamu pindah halaman.</p>
+          </>
         )}
       </div>
 

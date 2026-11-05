@@ -331,7 +331,33 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 10 }, (_, index) => emptyPage(index + 11)),
+  {
+    id: 11,
+    title: 'Andai Waktu Bisa Berhenti',
+    emoji: '⏳',
+    accent: '#cde9ff',
+    doodles: ['moon', 'heart', 'cloud'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Andai waktu bisa berhenti, aku bakal minta berhenti di saat pertama kali meet sama kamu.',
+      },
+      {
+        type: 'curhat',
+        text: 'Di sana rasanya aku bangga banget, senang banget. Semua perasaan campur aduk jadi satu.',
+      },
+      {
+        type: 'curhat',
+        text: 'Pas pertama kali jemput kamu ke rumah, kamu wangi. Sangat wangi. Sampai sekarang aku masih inget wangi itu, dan kadang pengin menciumnya lagi.',
+      },
+      {
+        type: 'quote',
+        text: 'Setiap kali inget wangi itu, rasanya hatiku jadi tenang banget.',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 11 }, (_, index) => emptyPage(index + 12)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {

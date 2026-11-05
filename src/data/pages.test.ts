@@ -115,8 +115,17 @@ describe('buku catatan 30 halaman', () => {
     expect(texts).toContain('diumpetin')
   })
 
-  it('halaman 11 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(10)) {
+  it('halaman 11 berisi kenangan pertemuan pertama', () => {
+    const eleventh = getPage(11)
+    expect(eleventh?.status).toBe('ready')
+    const texts = eleventh?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
+    expect(texts).toContain('pertama kali meet')
+    expect(texts).toContain('wangi')
+    expect(texts).toContain('tenang')
+  })
+
+  it('halaman 12 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(11)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }
