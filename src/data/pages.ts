@@ -289,7 +289,7 @@ export const pages: NotebookPage[] = [
       },
       {
         type: 'curhat',
-        text: 'Aku juga lagi belajar ikhlas buat lihat kamu nanti post sama cowok baru. Kemarin kamu ganti PP, terus post foto terus. Aku tahu kamu lagi deket sama cowok — atau mungkin baru save nomor cowok, Wid.',
+        text: 'Aku juga lagi belajar ikhlas buat lihat kamu nanti post sama cowok baru. Kemarin kamu sempat ganti PP, terus post dua foto — walaupun akhirnya satu kamu hapus. Aku tahu kamu lagi deket sama cowok, mungkin ada cowok yang bikin kamu penasaran, kayak dulu kamu bikin aku penasaran. Atau mungkin kamu baru save nomor cowok, Wid.'
       },
       {
         type: 'quote',
