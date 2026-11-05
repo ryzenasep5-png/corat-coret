@@ -75,8 +75,16 @@ describe('buku catatan 30 halaman', () => {
     expect(texts).toContain('stikernya')
   })
 
-  it('halaman 7 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(6)) {
+  it('halaman 7 berisi momen title global', () => {
+    const seventh = getPage(7)
+    expect(seventh?.status).toBe('ready')
+    const texts = seventh?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
+    expect(texts).toContain('title global')
+    expect(texts).toContain('tenang')
+  })
+
+  it('halaman 8 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(7)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }

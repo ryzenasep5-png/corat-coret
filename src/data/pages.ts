@@ -204,7 +204,39 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 6 }, (_, index) => emptyPage(index + 7)),
+  {
+    id: 7,
+    title: 'Title Global Pertama',
+    emoji: '🏆',
+    accent: '#fff1c9',
+    doodles: ['star', 'arrow', 'smiley'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Aku masih inget pas pertama kali kamu dapet title global. Aku seneng banget, hehe.',
+      },
+      {
+        type: 'photo',
+        src: '/photos/foto-title-global.jpg',
+        caption: 'title global pertamanya dia 🏆',
+        alt: 'Foto momen title global pertama',
+      },
+      {
+        type: 'curhat',
+        text: 'Rasanya hatiku tenang banget. Kayak semua jerih payah kamu akhirnya kebayar — dan aku ikut ngerasain senengnya.',
+      },
+      {
+        type: 'joke',
+        text: 'Aku nggak ikut main, tapi rasanya ikut menang. Dari bangku penonton: kamu keren banget, dan sekarang semua orang tahu.',
+      },
+      {
+        type: 'quote',
+        text: 'Saat kamu menang, hatiku ikut tenang — seolah bagian kecil dari aku juga dihargai dunia.',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 7 }, (_, index) => emptyPage(index + 8)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {
