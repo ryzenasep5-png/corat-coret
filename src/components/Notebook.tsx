@@ -7,6 +7,7 @@ import { readJSON, writeJSON } from '../lib/storage'
 import Doodles from './Doodles'
 import PlaylistBlock, { PersistentMusicPlayer } from './PlaylistBlock'
 import CalendarBlock from './CalendarBlock'
+import FinalQuestionBlock from './FinalQuestionBlock'
 
 const LAST_PAGE_KEY = 'lastPage'
 
@@ -24,6 +25,7 @@ const BLOCK_META: Record<PageBlock['type'], { icon: string; label: string }> = {
   calendar: { icon: '', label: '' },
   chat: { icon: '', label: '' },
   emptylines: { icon: '', label: '' },
+  question: { icon: '💌', label: '' },
 }
 
 function Tape({ color, side }: { color: string; side: 'left' | 'right' }) {
@@ -80,6 +82,10 @@ function Block({ block }: { block: PageBlock }) {
         <p className="mt-3 font-hand text-base text-inksoft/80 italic">{block.label}</p>
       </div>
     )
+  }
+
+  if (block.type === 'question') {
+    return <FinalQuestionBlock prompt={block.prompt} noLabel={block.noLabel} response={block.response} />
   }
 
   if (block.type === 'photo') {
@@ -177,7 +183,10 @@ function EmptyPage({ id }: { id: number }) {
 }
 
 export default function Notebook() {
-  const [pageId, setPageId] = useState(() => readJSON(LAST_PAGE_KEY, 1))
+  const [pageId, setPageId] = useState(() => {
+    const saved = readJSON<number>(LAST_PAGE_KEY, 1)
+    return Math.min(TOTAL_PAGES, Math.max(1, Number.isFinite(saved) ? saved : 1))
+  })
   const [direction, setDirection] = useState(0)
 
   const page = getPage(pageId) ?? pages[0]
@@ -241,7 +250,7 @@ export default function Notebook() {
         </button>
       </div>
 
-      <PersistentMusicPlayer />
+      <PersistentMusicPlayer visible={pageId === 2} />
 
       <div className="flip-viewport">
         <AnimatePresence mode="popLayout" initial={false}>

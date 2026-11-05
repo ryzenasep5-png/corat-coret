@@ -1,16 +1,6 @@
 import type { NotebookPage } from '../types'
 
-export const TOTAL_PAGES = 30
-
-const emptyPage = (id: number): NotebookPage => ({
-  id,
-  title: '',
-  emoji: '✏️',
-  accent: '#fffdf6',
-  doodles: ['squiggle'],
-  status: 'kosong',
-  blocks: [],
-})
+export const TOTAL_PAGES = 18
 
 export const pages: NotebookPage[] = [
   {
@@ -357,7 +347,190 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 11 }, (_, index) => emptyPage(index + 12)),
+  {
+    id: 12,
+    title: 'Maaf untuk Semua yang Telah Terjadi',
+    emoji: '🤍',
+    accent: '#ffd9e3',
+    doodles: ['heart', 'cloud', 'squiggle'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Maaf ya, Wid. Untuk semua yang udah terjadi.',
+      },
+      {
+        type: 'curhat',
+        text: 'Aku tahu, banyak hubungan yang rusak selama ini karena aku. Waktu sama kamu pun, aku masih jadi orang yang sama — banyak salahnya, banyak kurangnya.',
+      },
+      {
+        type: 'curhat',
+        text: 'Makasih udah bikin aku sadar. Dari kamu, aku jadi ngerti kalau aku harus beresin diri dan memperbaiki hidupku.',
+      },
+      {
+        type: 'quote',
+        text: 'Aku nggak bisa balikin semua yang rusak, tapi aku masih bisa mulai beresin diri.',
+      },
+    ],
+  },
+  {
+    id: 13,
+    title: 'Terima Kasih Pernah Ada',
+    emoji: '🌈',
+    accent: '#fff1c9',
+    doodles: ['star', 'heart', 'smiley'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Karena kamu pernah ada di hidupku, hidupku jadi jauh lebih berwarna.',
+      },
+      {
+        type: 'curhat',
+        text: 'Bahkan waktu sama kamu, aku bisa lupain semua mantanku. Rasanya fokusku cuma kamu, dan itu bikin aku bahagia banget.',
+      },
+      {
+        type: 'curhat',
+        text: 'Makasih ya, pernah jadi bagian paling hangat di hidupku. Aku mungkin nggak selalu bisa menjaganya, tapi aku nggak akan lupa rasanya.',
+      },
+      {
+        type: 'quote',
+        text: 'Kamu itu jantungku, Wid. Hehehe.',
+      },
+    ],
+  },
+  {
+    id: 14,
+    title: 'Kalau Suatu Saat Kita Bertemu',
+    emoji: '🕊️',
+    accent: '#cde9ff',
+    doodles: ['moon', 'cloud', 'arrow'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Kalau suatu saat kita bertemu lagi, aku cuma mau bilang makasih banyak.',
+      },
+      {
+        type: 'curhat',
+        text: 'Makasih atas semua yang pernah kamu kasih ke aku. Aku bakal jalanin hidup ini dengan lebih serius dan lebih menghargai semuanya.',
+      },
+      {
+        type: 'curhat',
+        text: 'Aku mau menganggap ini kesempatan terakhirku buat memperbaiki hidup, supaya nanti nggak terus-terusan punya penyesalan.',
+      },
+      {
+        type: 'quote',
+        text: 'Kalau nanti kita cuma jadi dua orang yang pernah saling kenal, semoga kamu tetap ingat: aku pernah benar-benar berterima kasih karena pernah bertemu kamu.',
+      },
+    ],
+  },
+  {
+    id: 15,
+    title: 'Aku Harap Kamu Bahagia',
+    emoji: '🪽',
+    accent: '#e5ddff',
+    doodles: ['heart', 'flower', 'cloud'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Mulailah lembaran baru lagi sama seseorang yang bisa bikin kamu bahagia.',
+      },
+      {
+        type: 'curhat',
+        text: 'Aku tahu, aku udah nggak pantas lagi buat kamu. Walaupun aku masih mau, kamu juga mungkin nggak bakal pernah nerima aku lagi.',
+      },
+      {
+        type: 'curhat',
+        text: 'Jujur, rasanya aku rela ngelakuin apa aja asal kamu bisa balik ke aku. Tapi aku nggak bisa maksa perasaan orang lain.',
+      },
+      {
+        type: 'curhat',
+        text: 'Jadi hiduplah, terbanglah. Walaupun nanti kamu sama yang lain, aku ikhlas. Sebentar lagi mungkin kamu bakal jadian sama cowok baru — semoga dia bisa jaga kamu.',
+      },
+      {
+        type: 'quote',
+        text: 'Aku harap kamu bahagia, walaupun bahagianya bukan lagi sama aku. Hehe.',
+      },
+    ],
+  },
+  {
+    id: 16,
+    title: '.....',
+    emoji: '🌫️',
+    accent: '#e5ddff',
+    doodles: ['cloud', 'squiggle', 'moon'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Aku nggak tahu, Wid.',
+      },
+      {
+        type: 'curhat',
+        text: 'Rasanya aku nyesel pernah mencintai seseorang sedalam itu. Tapi aku juga nyesel kenapa dulu aku mencintai sedalam itu kalau akhirnya aku sendiri yang ngerusak semuanya.',
+      },
+      {
+        type: 'quote',
+        text: 'Aku punya cinta yang besar, tapi lupa kalau cinta juga harus dijaga.',
+      },
+    ],
+  },
+  {
+    id: 17,
+    title: 'Halaman Terakhir dan Selamat Tinggal',
+    emoji: '✉️',
+    accent: '#fff1c9',
+    doodles: ['heart', 'moon', 'star'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Ini pesan terakhirku, Wid.',
+      },
+      {
+        type: 'curhat',
+        text: 'Makasih udah bikin aku belajar tentang arti cinta, setia, hubungan, dan hidup. Semua itu aku pelajari dari kamu.',
+      },
+      {
+        type: 'curhat',
+        text: 'Kamu first experience yang pernah bikin aku bahagia banget. Kalau suatu saat kamu udah nggak punya siapa-siapa lagi, aku bakal selalu nerima kamu.',
+      },
+      {
+        type: 'curhat',
+        text: 'Di hatiku ada satu slot yang nggak bisa digantikan: kamu. Tapi sekarang, mulailah lembaran baru sama cowok baru. Jangan takut kalau nanti disakitin lagi — mungkin cowok barumu nggak begituuuu.',
+      },
+      {
+        type: 'curhat',
+        text: 'Saat kamu baca semua ini, mungkin aku udah benar-benar pergi dari hidupmu. WhatsApp-ku mungkin cuma ceklis satu. Kalau mau hubungin aku, kamu bisa pakai nomor mamahmu — nomor itu masih kupin, walaupun sekarang diblokir. Heeh.',
+      },
+      {
+        type: 'quote',
+        text: 'I love you, Wid. See you. Maaf atas semua yang terjadi.',
+      },
+    ],
+  },
+  {
+    id: 18,
+    title: 'Kamu Mau Balikan Sama Aku?',
+    emoji: '😌',
+    accent: '#ffd9e3',
+    doodles: ['heart', 'smiley', 'squiggle'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'question',
+        prompt: 'Kamu mau balikan sama aku?',
+        noLabel: 'No',
+        response: 'Aku udah tahu jawabannya, makanya tombol yes aku hilangin 😌',
+      },
+      {
+        type: 'note',
+        text: 'by ryzen — semua ini dibuat oleh cinta terakhirku 🤍',
+      },
+    ],
+  },
 ]
 
 export function getPage(id: number): NotebookPage | undefined {

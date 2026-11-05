@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { getPage, pages, TOTAL_PAGES } from './pages'
 
-describe('buku catatan 30 halaman', () => {
-  it('memiliki tepat 30 halaman dengan id unik berurutan', () => {
-    expect(TOTAL_PAGES).toBe(30)
-    expect(pages).toHaveLength(30)
-    expect(pages.map((page) => page.id)).toEqual(Array.from({ length: 30 }, (_, index) => index + 1))
+describe('buku catatan 18 halaman', () => {
+  it('memiliki tepat 18 halaman dengan id unik berurutan', () => {
+    expect(TOTAL_PAGES).toBe(18)
+    expect(pages).toHaveLength(18)
+    expect(pages.map((page) => page.id)).toEqual(Array.from({ length: 18 }, (_, index) => index + 1))
   })
 
   it('halaman 1 berisi cerita yang diminta', () => {
@@ -124,10 +124,39 @@ describe('buku catatan 30 halaman', () => {
     expect(texts).toContain('tenang')
   })
 
-  it('halaman 12 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(11)) {
-      expect(page.status).toBe('kosong')
-      expect(page.blocks).toEqual([])
+  it('halaman 12 sampai 17 berisi catatan penutup yang nyambung', () => {
+    const expected = [
+      [12, 'Maaf untuk Semua yang Telah Terjadi', 'memperbaiki hidupku'],
+      [13, 'Terima Kasih Pernah Ada', 'jantungku'],
+      [14, 'Kalau Suatu Saat Kita Bertemu', 'lebih serius'],
+      [15, 'Aku Harap Kamu Bahagia', 'terbanglah'],
+      [16, '.....', 'ngerusak semuanya'],
+      [17, 'Halaman Terakhir dan Selamat Tinggal', 'first experience'],
+    ] as const
+
+    for (const [id, title, phrase] of expected) {
+      const page = getPage(id)
+      expect(page?.status).toBe('ready')
+      expect(page?.title).toBe(title)
+      const texts = page?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
+      expect(texts).toContain(phrase)
     }
+  })
+
+  it('halaman 18 punya candaan tombol balikan', () => {
+    const last = getPage(18)
+    expect(last?.status).toBe('ready')
+    const question = last?.blocks.find((block) => block.type === 'question')
+    if (question?.type === 'question') {
+      expect(question.prompt).toContain('balikan')
+      expect(question.noLabel).toBe('No')
+      expect(question.response).toContain('tombol yes')
+    }
+    const footer = last?.blocks.find((block) => block.type === 'note')
+    if (footer?.type === 'note') expect(footer.text).toContain('by ryzen')
+  })
+
+  it('tidak ada halaman setelah halaman 18', () => {
+    expect(getPage(19)).toBeUndefined()
   })
 })

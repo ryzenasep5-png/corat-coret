@@ -84,7 +84,7 @@ function YouTubePlayer({ track, autoplay, onError }: { track: Track; autoplay: b
   )
 }
 
-export function PersistentMusicPlayer() {
+export function PersistentMusicPlayer({ visible }: { visible: boolean }) {
   const player = usePlayer()
   const [frameErrorFor, setFrameErrorFor] = useState<string | null>(null)
   const frameError = frameErrorFor === player.current?.id
@@ -94,10 +94,11 @@ export function PersistentMusicPlayer() {
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="persistent-player w-full max-w-2xl"
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : -4 }}
+      className={`persistent-player w-full max-w-2xl ${visible ? '' : 'persistent-player-hidden'}`}
+      aria-hidden={!visible}
     >
-      <div className="flex items-center justify-between gap-2 font-hand text-sm text-inksoft">
+      <div className={visible ? 'flex items-center justify-between gap-2 font-hand text-sm text-inksoft' : 'hidden'}>
         <span className="min-w-0 truncate">
           <span className="text-ink">{player.current.title}</span> · {player.current.artist}
         </span>
@@ -110,7 +111,7 @@ export function PersistentMusicPlayer() {
           onError={() => setFrameErrorFor(player.current?.id ?? null)}
         />
       ) : null}
-      <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+      <div className={visible ? 'mt-2 flex flex-wrap items-center justify-center gap-2' : 'hidden'}>
         <button
           type="button"
           className="inline-flex items-center gap-1 rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink transition hover:border-rose/40 hover:text-rose"
@@ -133,11 +134,9 @@ export function PersistentMusicPlayer() {
           <ExternalLink size={13} /> Buka YouTube
         </button>
       </div>
-      {frameError ? (
-        <p className="mt-2 text-center font-hand text-sm text-rose">Player-nya nggak mau muncul di sini — tombol YouTube tetap bisa dipakai.</p>
-      ) : (
-        <p className="mt-2 text-center font-hand text-xs text-inksoft/80">Player ini tetap ada saat pindah halaman.</p>
-      )}
+      <p className={visible ? 'mt-2 text-center font-hand text-xs text-inksoft/80' : 'hidden'}>
+        {frameError ? 'Player-nya nggak mau muncul di sini — tombol YouTube tetap bisa dipakai.' : 'Player ini tetap ada saat pindah halaman.'}
+      </p>
     </motion.div>
   )
 }

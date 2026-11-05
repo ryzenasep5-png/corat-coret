@@ -224,7 +224,30 @@ body {
   box-shadow: 0 10px 26px -18px rgba(86, 68, 48, 0.65);
 }
 
-/* ---------- photo polaroid ---------- */
+.persistent-player-hidden {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 1px !important;
+  height: 1px;
+  min-height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+  box-shadow: none;
+}
+
+.persistent-player-hidden .youtube-player {
+  width: 1px;
+  min-height: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+/* ---------- photo polaroid ----------
 .block-photo {
   position: relative;
   max-width: 340px;
@@ -309,6 +332,14 @@ body {
   border-right: 1.5px solid rgba(59, 53, 80, 0.14);
   border-bottom: 1.5px solid rgba(59, 53, 80, 0.14);
   transform: rotate(45deg);
+}
+
+/* ---------- final question ---------- */
+.final-question {
+  padding: 1.25rem 1rem;
+  border: 2px dashed rgba(226, 115, 150, 0.35);
+  border-radius: 1.3rem;
+  background: rgba(255, 217, 227, 0.3);
 }
 
 /* ---------- nav buttons ---------- */

@@ -1,4 +1,4 @@
-export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist' | 'curhat' | 'photo' | 'calendar' | 'chat' | 'emptylines'
+export type BlockType = 'note' | 'joke' | 'quote' | 'list' | 'fact' | 'couple' | 'stamp' | 'playlist' | 'curhat' | 'photo' | 'calendar' | 'chat' | 'emptylines' | 'question'
 
 export interface NoteBlock {
   type: 'note'
@@ -83,6 +83,13 @@ export interface EmptyLinesBlock {
   label: string
 }
 
+export interface QuestionBlock {
+  type: 'question'
+  prompt: string
+  noLabel: string
+  response: string
+}
+
 export type PageBlock =
   | NoteBlock
   | JokeBlock
@@ -97,6 +104,7 @@ export type PageBlock =
   | CalendarBlock
   | ChatBlock
   | EmptyLinesBlock
+  | QuestionBlock
 
 export type DoodleKey = 'heart' | 'star' | 'moon' | 'smiley' | 'squiggle' | 'arrow' | 'flower' | 'cloud' | 'couple'
 
