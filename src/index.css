@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #fbf6ec;
+  --color-paperline: #e9dfc9;
+  --color-ink: #3b3550;
+  --color-inksoft: #6d6584;
+  --color-blush: #ffd9e3;
+  --color-mint: #cff2e3;
+  --color-sky: #cde9ff;
+  --color-lilac: #e5ddff;
+  --color-peach: #ffe3c9;
+  --color-butter: #fff1c9;
+  --color-rose: #e27396;
+  --font-hand: "Patrick Hand", "Comic Sans MS", cursive;
+  --font-scribble: "Caveat", cursive;
+  --font-ui: "Nunito", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: #efe6d4;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--font-ui);
+  color: var(--color-ink);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 217, 227, 0.5), transparent 26rem),
+    radial-gradient(circle at 88% 18%, rgba(205, 233, 255, 0.55), transparent 24rem),
+    radial-gradient(circle at 50% 96%, rgba(207, 242, 227, 0.5), transparent 28rem),
+    #efe6d4;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+::selection {
+  background: var(--color-blush);
+  color: var(--color-ink);
+}
+
+/* ---------- desk / notebook ---------- */
+.notebook {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1rem 3rem;
+  min-height: 100svh;
+}
+
+.spiral {
+  position: absolute;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  left: 0.55rem;
+  width: 26px;
+  background-image: radial-gradient(circle 5px at 50% 50%, #b9aecb 0 3px, #8f84a8 3px 4.5px, transparent 5px);
+  background-size: 26px 26px;
+  background-repeat: repeat-y;
+  opacity: 0.9;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .spiral {
+    display: block;
+  }
+}
+
+/* ---------- paper sheet ---------- */
+.sheet {
+  position: relative;
+  width: min(640px, 100%);
+  min-height: 70vh;
+  border-radius: 1.6rem;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(90, 78, 130, 0.09) 31px 32px),
+    linear-gradient(180deg, #fffdf6 0%, #fbf6ec 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 22px 55px -18px rgba(86, 68, 48, 0.35),
+    0 6px 18px -8px rgba(86, 68, 48, 0.25);
+  padding: 3.6rem 2rem 2.4rem;
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+
+.sheet-corner {
+  position: absolute;
+  z-index: 3;
+  top: -11px;
+  width: 118px;
+  height: 34px;
+  opacity: 0.85;
+  filter: drop-shadow(0 3px 3px rgba(90, 70, 40, 0.16));
+  pointer-events: none;
+}
+
+.sheet-corner.left {
+  left: -26px;
+  transform: rotate(-12deg);
+}
+
+.sheet-corner.right {
+  right: -26px;
+  transform: rotate(11deg);
+}
+
+/* ---------- page flip ---------- */
+.flip-viewport {
+  perspective: 1800px;
+  width: min(640px, 100%);
+}
+
+/* ---------- doodles ---------- */
+.doodle {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+.doodle svg {
+  display: block;
+  overflow: visible;
+}
+
+.doodle-wiggle {
+  animation: doodle-wiggle 4.5s ease-in-out infinite;
+}
+
+.doodle-float {
+  animation: doodle-float 6s ease-in-out infinite;
+}
+
+@keyframes doodle-wiggle {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(4deg) translateY(-4px); }
+}
+
+@keyframes doodle-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(3deg); }
+}
+
+/* ---------- blocks ---------- */
+.block-note,
+.block-curhat {
+  background: rgba(255, 241, 201, 0.55);
+  border: 1.5px dashed rgba(214, 178, 94, 0.55);
+  border-radius: 0.9rem;
+}
+
+.block-joke {
+  background: rgba(255, 217, 227, 0.45);
+  border: 1.5px dashed rgba(226, 115, 150, 0.4);
+  border-radius: 0.9rem;
+}
+
+.block-quote {
+  border-left: 4px solid var(--color-lilac);
+  background: linear-gradient(90deg, rgba(229, 221, 255, 0.5), transparent);
+}
+
+.block-fact {
+  background: rgba(205, 233, 255, 0.5);
+  border: 1.5px dashed rgba(96, 160, 210, 0.4);
+  border-radius: 0.9rem;
+}
+
+.block-list {
+  background: rgba(207, 242, 227, 0.5);
+  border: 1.5px dashed rgba(96, 180, 140, 0.4);
+  border-radius: 0.9rem;
+}
+
+/* ---------- nav buttons ---------- */
+.nav-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(59, 53, 80, 0.18);
+  background: #fffdf6;
+  box-shadow: 0 5px 14px -6px rgba(86, 68, 48, 0.4);
+  color: var(--color-ink);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.nav-arrow:hover {
+  transform: translateY(-2px);
+  background: var(--color-blush);
+}
+
+.nav-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.page-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(59, 53, 80, 0.18);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.page-dot.active {
+  background: var(--color-rose);
+  transform: scale(1.5);
+}
+
+.page-dot.filled {
+  background: rgba(59, 53, 80, 0.45);
+}
+
+/* ---------- empty page ---------- */
+.empty-page {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.empty-page .scribble {
+  font-family: var(--font-scribble);
+  font-size: 2.6rem;
+  color: var(--color-inksoft);
+  transform: rotate(-3deg);
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .doodle-wiggle,
+  .doodle-float {
+    animation: none !important;
+  }
+}
