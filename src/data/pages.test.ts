@@ -44,7 +44,7 @@ describe('buku catatan 30 halaman', () => {
     expect(fourth?.status).toBe('ready')
     const photo = fourth?.blocks.find((block) => block.type === 'photo')
     if (photo?.type === 'photo') {
-      expect(photo.src).toBe('/photos/foto-kedua-kali.jpg')
+      expect(photo.src).toBe('photos/foto-kedua-kali.jpg')
     }
     const texts = fourth?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
     expect(texts).toContain('cowok pertama')
@@ -68,16 +68,20 @@ describe('buku catatan 30 halaman', () => {
     expect(sixth?.status).toBe('ready')
     const photo = sixth?.blocks.find((block) => block.type === 'photo')
     if (photo?.type === 'photo') {
-      expect(photo.src).toBe('/photos/foto-gelang.jpg')
+      expect(photo.src).toBe('photos/foto-gelang.jpg')
     }
     const texts = sixth?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
     expect(texts).toContain('masih simpen')
     expect(texts).toContain('stikernya')
   })
 
-  it('halaman 7 berisi momen title global', () => {
+  it('halaman 7 berisi momen title global dan fotonya', () => {
     const seventh = getPage(7)
     expect(seventh?.status).toBe('ready')
+    const photo = seventh?.blocks.find((block) => block.type === 'photo')
+    if (photo?.type === 'photo') {
+      expect(photo.src).toBe('photos/foto-title-global.jpg')
+    }
     const texts = seventh?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
     expect(texts).toContain('title global')
     expect(texts).toContain('tenang')

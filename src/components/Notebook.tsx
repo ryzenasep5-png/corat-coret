@@ -83,9 +83,13 @@ function Block({ block }: { block: PageBlock }) {
   }
 
   if (block.type === 'photo') {
+    const imageSrc = block.src.startsWith('http')
+      ? block.src
+      : `${import.meta.env.BASE_URL}${block.src.replace(/^\/+/, '')}`
+
     return (
       <figure className="block-photo my-6">
-        <img src={block.src} alt={block.alt ?? block.caption ?? 'Foto kenangan'} loading="lazy" />
+        <img src={imageSrc} alt={block.alt ?? block.caption ?? 'Foto kenangan'} loading="lazy" />
         {block.caption ? <figcaption className="font-hand text-lg text-inksoft">{block.caption}</figcaption> : null}
       </figure>
     )

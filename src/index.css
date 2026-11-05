@@ -207,6 +207,14 @@ body {
   animation: eq-bounce 0.8s ease-in-out infinite;
 }
 
+.youtube-player {
+  display: block;
+  aspect-ratio: 16 / 9;
+  min-height: 180px;
+  border: 0;
+  background: #252238;
+}
+
 /* ---------- photo polaroid ---------- */
 .block-photo {
   position: relative;

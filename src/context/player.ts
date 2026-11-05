@@ -4,15 +4,9 @@ import type { Track } from '../data/tracks'
 export interface PlayerApi {
   current: Track | null
   playing: boolean
-  ready: boolean
-  failed: boolean
-  time: number
-  duration: number
   playTrack: (track: Track) => void
-  togglePlay: () => void
   next: () => void
   previous: () => void
-  seek: (seconds: number) => void
   openOnYouTube: (track: Track) => void
 }
 

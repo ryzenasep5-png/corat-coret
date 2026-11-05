@@ -130,7 +130,7 @@ export const pages: NotebookPage[] = [
       },
       {
         type: 'photo',
-        src: '/photos/foto-kedua-kali.jpg',
+        src: 'photos/foto-kedua-kali.jpg',
         caption: 'kedua kalinya kita meet 🤍',
         alt: 'Foto kenangan pertemuan kedua',
       },
@@ -186,7 +186,7 @@ export const pages: NotebookPage[] = [
       },
       {
         type: 'photo',
-        src: '/photos/foto-gelang.jpg',
+        src: 'photos/foto-gelang.jpg',
         caption: 'masih kusimpen 🤍',
         alt: 'Foto gelang kenangan yang sudah polos hitam',
       },
@@ -218,7 +218,7 @@ export const pages: NotebookPage[] = [
       },
       {
         type: 'photo',
-        src: '/photos/foto-title-global.jpg',
+        src: 'photos/foto-title-global.jpg',
         caption: 'title global pertamanya dia 🏆',
         alt: 'Foto momen title global pertama',
       },

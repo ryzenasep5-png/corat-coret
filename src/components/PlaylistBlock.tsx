@@ -1,14 +1,9 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { ExternalLink, Pause, Play, SkipBack, SkipForward } from 'lucide-react'
+import { ExternalLink, SkipBack, SkipForward } from 'lucide-react'
 import { useState } from 'react'
 import { usePlayer } from '../context/player'
 import { tracks } from '../data/tracks'
 import type { Track } from '../data/tracks'
-
-function formatTime(seconds: number) {
-  const safe = Number.isFinite(seconds) ? Math.max(0, Math.floor(seconds)) : 0
-  return `${Math.floor(safe / 60)}:${String(safe % 60).padStart(2, '0')}`
-}
 
 function EqualizerBars({ active }: { active: boolean }) {
   return (
@@ -39,6 +34,7 @@ function TrackRow({ track, index }: { track: Track; index: number }) {
       <button
         type="button"
         onClick={() => player.playTrack(track)}
+        aria-pressed={isCurrent}
         className={`flex w-full items-center gap-3 rounded-xl border-2 px-3 py-2 text-left transition ${
           isCurrent
             ? 'border-rose/50 bg-blush/60'
@@ -46,7 +42,7 @@ function TrackRow({ track, index }: { track: Track; index: number }) {
         }`}
       >
         <span className="flex w-7 shrink-0 items-center justify-center">
-          {isPlaying ? <EqualizerBars active /> : <Play size={14} className={isCurrent ? 'text-rose' : 'text-inksoft'} />}
+          {isPlaying ? <EqualizerBars active /> : <span className="font-hand text-sm text-inksoft">▶</span>}
         </span>
         <span className="min-w-0 flex-1">
           <span className={`block truncate font-hand text-lg leading-tight ${isCurrent ? 'text-rose' : 'text-ink'}`}>
@@ -60,10 +56,39 @@ function TrackRow({ track, index }: { track: Track; index: number }) {
   )
 }
 
+function YouTubePlayer({ track, autoplay, onError }: { track: Track; autoplay: boolean; onError: () => void }) {
+  if (!track.videoId) return null
+  const origin = typeof window === 'undefined' ? '' : window.location.origin
+  const query = new URLSearchParams({
+    autoplay: autoplay ? '1' : '0',
+    controls: '1',
+    enablejsapi: '1',
+    modestbranding: '1',
+    playsinline: '1',
+    rel: '0',
+  })
+  if (origin) query.set('origin', origin)
+
+  return (
+    <iframe
+      key={track.id}
+      src={`https://www.youtube-nocookie.com/embed/${track.videoId}?${query.toString()}`}
+      title={`${track.title} — ${track.artist}`}
+      className="youtube-player mt-3 w-full rounded-xl"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowFullScreen
+      loading="eager"
+      referrerPolicy="strict-origin-when-cross-origin"
+      onError={onError}
+    />
+  )
+}
+
 export default function PlaylistBlock({ title, subtitle }: { title: string; subtitle?: string }) {
   const player = usePlayer()
   const [collapsed, setCollapsed] = useState(false)
-  const progress = player.duration > 0 ? (player.time / player.duration) * 100 : 0
+  const [frameErrorFor, setFrameErrorFor] = useState<string | null>(null)
+  const frameError = frameErrorFor === player.current?.id
 
   return (
     <div className="my-5">
@@ -72,67 +97,57 @@ export default function PlaylistBlock({ title, subtitle }: { title: string; subt
         {subtitle ? <p className="mt-1 font-hand text-base text-inksoft">{subtitle}</p> : null}
       </div>
 
-      {/* Mini player */}
-      <div className="mt-4 rounded-2xl border-2 border-dashed border-ink/20 bg-butter/55 px-4 py-3">
-        <div className="flex items-center justify-between gap-2 font-hand text-sm text-inksoft">
-          <span className="min-w-0 truncate">
-            {player.current ? (
-              <>
+      <div className="mt-4 rounded-2xl border-2 border-dashed border-ink/20 bg-butter/55 px-3 py-3 sm:px-4">
+        {player.current ? (
+          <>
+            <div className="flex items-center justify-between gap-2 font-hand text-sm text-inksoft">
+              <span className="min-w-0 truncate">
                 <span className="text-ink">{player.current.title}</span> · {player.current.artist}
-              </>
-            ) : (
-              'Pencet lagunya, nanti nyanyi sendiri di sini 🎵'
-            )}
-          </span>
-          <span className="shrink-0 tabular-nums">
-            {formatTime(player.time)} / {formatTime(player.duration)}
-          </span>
-        </div>
-
-        <div className="mt-2 flex items-center gap-3">
-          <input
-            type="range"
-            min={0}
-            max={player.duration || 1}
-            step={1}
-            value={Math.min(player.time, player.duration || 1)}
-            onChange={(event) => player.seek(Number(event.target.value))}
-            className="h-1 flex-1 cursor-pointer accent-[#e27396]"
-            aria-label="Posisi lagu"
-          />
-          <span className="block h-1.5 w-1.5 shrink-0 rounded-full" style={{ width: `${Math.max(3, progress)}px` }} aria-hidden="true" />
-        </div>
-
-        <div className="mt-2 flex items-center justify-center gap-4">
-          <button type="button" className="text-ink transition hover:text-rose" onClick={player.previous} aria-label="Lagu sebelumnya">
-            <SkipBack size={18} />
-          </button>
-          <button
-            type="button"
-            onClick={player.togglePlay}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-rose text-white shadow-md shadow-rose/30 transition hover:brightness-105"
-            aria-label={player.playing ? 'Jeda' : 'Putar'}
-          >
-            {player.playing ? <Pause size={19} /> : <Play size={19} className="ml-0.5" />}
-          </button>
-          <button type="button" className="text-ink transition hover:text-rose" onClick={player.next} aria-label="Lagu berikutnya">
-            <SkipForward size={18} />
-          </button>
-        </div>
-
-        <AnimatePresence>
-          {player.failed ? (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mt-2 text-center">
+              </span>
+              <span className="shrink-0 text-rose">YouTube</span>
+            </div>
+            {!frameError ? (
+              <YouTubePlayer
+                track={player.current}
+                autoplay={player.playing}
+                onError={() => setFrameErrorFor(player.current?.id ?? null)}
+              />
+            ) : null}
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
               <button
                 type="button"
-                onClick={() => player.current && player.openOnYouTube(player.current)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-rose/40 bg-white/70 px-3 py-1 font-hand text-sm text-rose"
+                className="inline-flex items-center gap-1 rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink transition hover:border-rose/40 hover:text-rose"
+                onClick={player.previous}
               >
-                <ExternalLink size={13} /> Lagu ini nggak bisa diputar di sini — buka di YouTube
+                <SkipBack size={14} /> Sebelumnya
               </button>
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink transition hover:border-rose/40 hover:text-rose"
+                onClick={player.next}
+              >
+                Berikutnya <SkipForward size={14} />
+              </button>
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 rounded-full border border-rose/40 bg-white/70 px-3 py-1 font-hand text-sm text-rose transition hover:bg-blush/50"
+                onClick={() => player.openOnYouTube(player.current!)}
+              >
+                <ExternalLink size={13} /> Buka YouTube
+              </button>
+            </div>
+            {frameError ? (
+              <p className="mt-2 text-center font-hand text-sm text-rose">Player-nya nggak mau muncul di sini — tombol YouTube di atas tetap bisa dipakai.</p>
+            ) : (
+              <p className="mt-2 text-center font-hand text-xs text-inksoft/80">Kalau belum otomatis bunyi, pencet ▶ di dalam player-nya ya 🎵</p>
+            )}
+          </>
+        ) : (
+          <div className="rounded-xl border border-ink/10 bg-white/50 px-4 py-8 text-center">
+            <p className="font-hand text-lg text-ink">Pilih salah satu lagu di bawah 🎵</p>
+            <p className="mt-1 font-hand text-sm text-inksoft">Player YouTube-nya akan muncul di sini.</p>
+          </div>
+        )}
       </div>
 
       <div className="mt-3 text-center">
