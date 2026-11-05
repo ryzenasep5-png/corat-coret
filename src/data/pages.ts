@@ -297,7 +297,41 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 9 }, (_, index) => emptyPage(index + 10)),
+  {
+    id: 10,
+    title: 'Andai Masih Ada Kesempatan',
+    emoji: '🕯️',
+    accent: '#e5ddff',
+    doodles: ['moon', 'heart', 'arrow'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Selama beberapa hari ini aku nyesel atas apa yang aku lakuin ke kamu dulu.',
+      },
+      {
+        type: 'curhat',
+        text: 'Andai aku masih punya kesempatan, aku bakal selalu berharap kesempatan itu datang lagi. Padahal udah banyak kesempatan yang kamu kasih ke aku.',
+      },
+      {
+        type: 'curhat',
+        text: 'Tapi kalau kesempatan itu masih ada, aku bakal berubah dengan sungguh-sungguh. Aku bakal selalu ada buat kamu.',
+      },
+      {
+        type: 'curhat',
+        text: 'Pas terakhir kita putus, aku juga nyesel. Padahal waktu itu aku nggak bisa nemenin kamu, tapi aku malah bersikap begitu. Rasanya aku mau nangis kalau inget.',
+      },
+      {
+        type: 'curhat',
+        text: 'Aku selalu berdoa, andai aku dikasih kesempatan, aku mau memperbaiki semuanya. Tapi aku sadar, kamu mungkin nggak bakal kasih aku kesempatan lagi. Aku bahkan masih beresin masalah yang sebelumnya, dan semuanya tetap berjalan sampai sekarang.',
+      },
+      {
+        type: 'quote',
+        text: 'Wid, semisalnya aku diberi kesempatan, walaupun aku harus diumpetin, aku nggak masalah. Asal aku masih bisa sama kamu.',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 10 }, (_, index) => emptyPage(index + 11)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {
