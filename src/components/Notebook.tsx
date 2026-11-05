@@ -22,6 +22,8 @@ const BLOCK_META: Record<PageBlock['type'], { icon: string; label: string }> = {
   curhat: { icon: '🌧️', label: '' },
   photo: { icon: '', label: '' },
   calendar: { icon: '', label: '' },
+  chat: { icon: '', label: '' },
+  emptylines: { icon: '', label: '' },
 }
 
 function Tape({ color, side }: { color: string; side: 'left' | 'right' }) {
@@ -52,6 +54,31 @@ function Block({ block }: { block: PageBlock }) {
   if (block.type === 'calendar') {
     return (
       <CalendarBlock monthLabel={block.monthLabel} days={block.days} marked={block.marked} startDay={block.startDay} />
+    )
+  }
+
+  if (block.type === 'chat') {
+    return (
+      <div className="my-5">
+        <div className="chat-bubble">
+          <p className="font-hand text-xl text-ink">{block.text}</p>
+        </div>
+        <p className="mt-1.5 pl-2 font-hand text-xs text-inksoft/80">{block.date}</p>
+      </div>
+    )
+  }
+
+  if (block.type === 'emptylines') {
+    return (
+      <div className="emptylines my-5">
+        <div className="space-y-3">
+          <span className="block h-px w-3/4 bg-ink/15" />
+          <span className="block h-px w-2/3 bg-ink/10" />
+          <span className="block h-px w-1/2 bg-ink/8" />
+          <span className="block h-px w-1/3 bg-ink/5" />
+        </div>
+        <p className="mt-3 font-hand text-base text-inksoft/80 italic">{block.label}</p>
+      </div>
     )
   }
 

@@ -236,7 +236,38 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 7 }, (_, index) => emptyPage(index + 8)),
+  {
+    id: 8,
+    title: '3 Mei 2026',
+    emoji: '🕊️',
+    accent: '#e5ddff',
+    doodles: ['cloud', 'moon', 'squiggle'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: '3 Mei 2026. Catatan terakhir kamu yang masih bisa kubaca.',
+      },
+      {
+        type: 'chat',
+        text: '…',
+        date: '3 Mei 2026',
+      },
+      {
+        type: 'emptylines',
+        label: 'setelah itu…',
+      },
+      {
+        type: 'quote',
+        text: '685 hari. Andai kita nggak pernah putus, itu yang bakal kita rasain sekarang, Wid.',
+      },
+      {
+        type: 'curhat',
+        text: 'Kosong. Nggak ada apa-apa lagi. :)',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 8 }, (_, index) => emptyPage(index + 9)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {

@@ -83,8 +83,17 @@ describe('buku catatan 30 halaman', () => {
     expect(texts).toContain('tenang')
   })
 
-  it('halaman 8 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(7)) {
+  it('halaman 8 menyimpan catatan terakhir dan 685 hari yang seharusnya', () => {
+    const eighth = getPage(8)
+    expect(eighth?.status).toBe('ready')
+    const texts = eighth?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
+    expect(texts).toContain('3 Mei 2026')
+    expect(texts).toContain('685 hari')
+    expect(texts).toContain('nggak pernah putus')
+  })
+
+  it('halaman 9 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(8)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }
