@@ -63,8 +63,20 @@ describe('buku catatan 30 halaman', () => {
     }
   })
 
-  it('halaman 6 sampai 30 masih berstatus kosong', () => {
-    for (const page of pages.slice(5)) {
+  it('halaman 6 berisi kenangan gelang dengan foto', () => {
+    const sixth = getPage(6)
+    expect(sixth?.status).toBe('ready')
+    const photo = sixth?.blocks.find((block) => block.type === 'photo')
+    if (photo?.type === 'photo') {
+      expect(photo.src).toBe('/photos/foto-gelang.jpg')
+    }
+    const texts = sixth?.blocks.map((block) => (block as { text?: string }).text ?? '').join(' ') ?? ''
+    expect(texts).toContain('masih simpen')
+    expect(texts).toContain('stikernya')
+  })
+
+  it('halaman 7 sampai 30 masih berstatus kosong', () => {
+    for (const page of pages.slice(6)) {
       expect(page.status).toBe('kosong')
       expect(page.blocks).toEqual([])
     }

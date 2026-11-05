@@ -172,7 +172,39 @@ export const pages: NotebookPage[] = [
       },
     ],
   },
-  ...Array.from({ length: TOTAL_PAGES - 5 }, (_, index) => emptyPage(index + 6)),
+  {
+    id: 6,
+    title: 'Gelangnya Lucu Ya',
+    emoji: '🤍',
+    accent: '#e5ddff',
+    doodles: ['heart', 'squiggle', 'smiley'],
+    status: 'ready',
+    blocks: [
+      {
+        type: 'note',
+        text: 'Gelangnya lucu ya? Kamu masih simpen nggak?',
+      },
+      {
+        type: 'photo',
+        src: '/photos/foto-gelang.jpg',
+        caption: 'masih kusimpen 🤍',
+        alt: 'Foto gelang kenangan yang sudah polos hitam',
+      },
+      {
+        type: 'curhat',
+        text: 'Aku masih nyimpen. Walaupun stikernya udah nggak ada — sekarang cuma polos item, karena sering banget kupake.',
+      },
+      {
+        type: 'joke',
+        text: 'Saking sering kupake, stikernya sampai menyerah duluan. Maaf ya, gelang. Kamu terlalu sayang buat cuma duduk manis di laci.',
+      },
+      {
+        type: 'quote',
+        text: 'Ada benda kecil yang jadi saksi: dipakai terus setiap hari, bukan disimpan rapi di dalam laci.',
+      },
+    ],
+  },
+  ...Array.from({ length: TOTAL_PAGES - 6 }, (_, index) => emptyPage(index + 7)),
 ]
 
 export function getPage(id: number): NotebookPage | undefined {
