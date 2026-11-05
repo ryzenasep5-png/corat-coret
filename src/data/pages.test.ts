@@ -57,6 +57,8 @@ describe('buku catatan 30 halaman', () => {
     const calendar = fifth?.blocks.find((block) => block.type === 'calendar')
     if (calendar?.type === 'calendar') {
       expect(calendar.days).toBe(28)
+      expect(calendar.monthLabel).toContain('2027')
+      expect(calendar.startDay).toBe(0)
       expect(calendar.marked.some((mark) => mark.day === 1 && mark.style === 'ring')).toBe(true)
     }
   })

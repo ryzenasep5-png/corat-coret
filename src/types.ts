@@ -69,6 +69,7 @@ export interface CalendarBlock {
   monthLabel: string
   days: number
   marked: CalendarMark[]
+  startDay?: number
 }
 
 export type PageBlock =

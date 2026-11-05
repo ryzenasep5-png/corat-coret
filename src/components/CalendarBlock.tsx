@@ -1,6 +1,6 @@
 import type { CalendarMark } from '../types'
 
-const WEEKDAYS = ['Sn', 'Sl', 'Rb', 'Km', 'Jm', 'Sb', 'Mg']
+const WEEKDAYS = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']
 
 function RingCircle() {
   return (
@@ -37,10 +37,12 @@ export default function CalendarBlock({
   monthLabel,
   days,
   marked,
+  startDay = 0,
 }: {
   monthLabel: string
   days: number
   marked: CalendarMark[]
+  startDay?: number
 }) {
   const marksByDay = new Map(marked.map((mark) => [mark.day, mark]))
 
@@ -54,6 +56,9 @@ export default function CalendarBlock({
       <div className="mt-3 grid grid-cols-7 gap-1 text-center">
         {WEEKDAYS.map((day) => (
           <p key={day} className="py-1 font-hand text-xs text-inksoft/80">{day}</p>
+        ))}
+        {Array.from({ length: startDay }, (_, index) => (
+          <div key={`blank-${index}`} aria-hidden="true" />
         ))}
         {Array.from({ length: days }, (_, index) => index + 1).map((day) => {
           const mark = marksByDay.get(day)

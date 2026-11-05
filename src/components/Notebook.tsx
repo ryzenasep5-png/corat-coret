@@ -50,7 +50,9 @@ function Block({ block }: { block: PageBlock }) {
   }
 
   if (block.type === 'calendar') {
-    return <CalendarBlock monthLabel={block.monthLabel} days={block.days} marked={block.marked} />
+    return (
+      <CalendarBlock monthLabel={block.monthLabel} days={block.days} marked={block.marked} startDay={block.startDay} />
+    )
   }
 
   if (block.type === 'photo') {

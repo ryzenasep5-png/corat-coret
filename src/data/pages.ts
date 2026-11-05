@@ -158,8 +158,9 @@ export const pages: NotebookPage[] = [
       },
       {
         type: 'calendar',
-        monthLabel: 'Februari',
+        monthLabel: 'Februari 2027',
         days: 28,
+        startDay: 0,
         marked: [
           { day: 1, label: 'ulang tahun dia 🎂', style: 'ring' },
           { day: 14, label: 'valentine 💘', style: 'heart' },
